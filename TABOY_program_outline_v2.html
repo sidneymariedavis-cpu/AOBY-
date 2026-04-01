@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art of Being You — Program Outline</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5EDE0;
+    --forest: #2D4A42;
+    --forest-light: #3d6358;
+    --gold: #C4975A;
+    --gold-light: #e8c99a;
+    --dark: #1a2e28;
+    --text: #2a2a2a;
+    --muted: #7a6e65;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .header {
+    background: var(--forest);
+    color: var(--cream);
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,151,90,0.2);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,237,224,0.1);
+  }
+
+  .program-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .program-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+
+  .program-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .program-subtitle {
+    font-size: 14px;
+    color: rgba(245,237,224,0.7);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .promise-box {
+    background: rgba(196,151,90,0.15);
+    border-left: 2px solid var(--gold);
+    padding: 24px 28px;
+    max-width: 760px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .promise-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .promise-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.7;
+  }
+
+  .meta-bar {
+    background: var(--dark);
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .meta-item {
+    flex: 1;
+    padding: 24px 32px;
+    border-right: 1px solid rgba(245,237,224,0.08);
+    text-align: center;
+  }
+
+  .meta-item:last-child { border-right: none; }
+
+  .meta-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,237,224,0.4);
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section {
+    padding: 60px 0 40px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--forest);
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 40px;
+    opacity: 0.3;
+  }
+
+  /* PHASE BLOCK */
+  .phase-block {
+    margin-bottom: 56px;
+  }
+
+  .phase-header {
+    background: var(--forest);
+    color: var(--cream);
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  .phase-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .phase-meta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .phase-shift {
+    font-size: 12px;
+    color: rgba(245,237,224,0.6);
+    margin-left: auto;
+    font-style: italic;
+    max-width: 320px;
+    text-align: right;
+  }
+
+  /* STEPS */
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(45,74,66,0.08);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.5;
+    line-height: 1;
+  }
+
+  .step-keyword {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.6;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  .step-content {}
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .teaching-points {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+
+  .teaching-points li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 7px 14px;
+    position: relative;
+    border-left: 2px solid var(--gold-light);
+    margin-bottom: 6px;
+    background: rgba(196,151,90,0.05);
+    line-height: 1.6;
+  }
+
+  /* INTEGRATION PIECE */
+  .integration {
+    background: white;
+    border: 1px solid rgba(45,74,66,0.1);
+    padding: 14px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 4px;
+  }
+
+  .integration-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .integration-body {}
+
+  .integration-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--forest);
+    margin-bottom: 3px;
+  }
+
+  .integration-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PHASE FEELS */
+  .phase-feels {
+    background: rgba(45,74,66,0.05);
+    border-left: 3px solid var(--forest);
+    padding: 18px 22px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+
+  .phase-feels-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .phase-feels-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* PLAYBOOKS */
+  .playbooks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .playbook-card {
+    background: white;
+    border: 1px solid rgba(45,74,66,0.1);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .playbook-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--forest);
+  }
+
+  .playbook-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+
+  .playbook-objective {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .playbook-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* BONUS */
+  .bonus-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .bonus-list li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 12px 16px;
+    border: 1px dashed rgba(196,151,90,0.4);
+  }
+
+  .bonus-list li::before {
+    content: '✦';
+    color: var(--gold);
+    margin-right: 8px;
+    font-size: 10px;
+  }
+
+  /* CADENCE */
+  .cadence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .cadence-card {
+    background: white;
+    border: 1px solid rgba(45,74,66,0.1);
+    padding: 28px;
+  }
+
+  .cadence-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--forest);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .cadence-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cadence-list li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(45,74,66,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cadence-list li:last-child { border-bottom: none; }
+
+  .cadence-week {
+    font-size: 10px;
+    background: var(--forest);
+    color: var(--cream);
+    padding: 2px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* TIERS */
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .tier-card { padding: 36px; position: relative; }
+  .tier-base { background: white; border: 1px solid rgba(45,74,66,0.12); }
+  .tier-vip { background: var(--forest); color: var(--cream); }
+
+  .tier-badge {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .tier-base .tier-badge { color: var(--muted); }
+  .tier-vip .tier-badge { color: var(--gold-light); }
+
+  .tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .tier-base .tier-name { color: var(--forest); }
+  .tier-vip .tier-name { color: var(--cream); }
+
+  .tier-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1;
+    margin: 20px 0 6px;
+  }
+
+  .tier-base .tier-price { color: var(--forest); }
+  .tier-vip .tier-price { color: var(--gold-light); }
+
+  .tier-pp {
+    font-size: 12px;
+    margin-bottom: 28px;
+  }
+
+  .tier-base .tier-pp { color: var(--muted); }
+  .tier-vip .tier-pp { color: rgba(245,237,224,0.5); }
+
+  .tier-divider {
+    height: 1px;
+    margin-bottom: 24px;
+  }
+
+  .tier-base .tier-divider { background: rgba(45,74,66,0.1); }
+  .tier-vip .tier-divider { background: rgba(245,237,224,0.15); }
+
+  .tier-includes {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .tier-base .tier-includes { color: var(--muted); }
+  .tier-vip .tier-includes { color: var(--gold-light); }
+
+  .tier-features {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tier-features li {
+    font-size: 13px;
+    padding: 7px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .tier-vip .tier-features li {
+    border-bottom-color: rgba(255,255,255,0.06);
+    color: rgba(245,237,224,0.85);
+  }
+
+  .tier-features li::before {
+    content: '→';
+    font-size: 11px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tier-base .tier-features li::before { color: var(--gold); }
+  .tier-vip .tier-features li::before { color: var(--gold-light); }
+
+  /* RENEWAL */
+  .renewal-card {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--dark) 100%);
+    padding: 48px;
+    color: var(--cream);
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .renewal-card::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,151,90,0.15);
+  }
+
+  .renewal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+
+  .renewal-sub {
+    font-size: 13px;
+    color: rgba(245,237,224,0.5);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .renewal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .renewal-option {
+    background: rgba(245,237,224,0.06);
+    border: 1px solid rgba(245,237,224,0.1);
+    padding: 24px;
+  }
+
+  .renewal-option-name {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .renewal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .renewal-pp {
+    font-size: 12px;
+    color: rgba(245,237,224,0.4);
+    margin-bottom: 20px;
+  }
+
+  .renewal-includes {
+    list-style: none;
+    padding: 0;
+  }
+
+  .renewal-includes li {
+    font-size: 12px;
+    color: rgba(245,237,224,0.7);
+    padding: 5px 0;
+    display: flex;
+    gap: 8px;
+  }
+
+  .renewal-includes li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 9px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .footer {
+    background: var(--dark);
+    padding: 40px 60px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: rgba(245,237,224,0.3);
+    letter-spacing: 1px;
+  }
+
+  hr.soft {
+    border: none;
+    border-top: 1px solid rgba(45,74,66,0.1);
+    margin: 32px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <span class="program-label">Renew You Living — Signature Program</span>
+  <h1 class="program-title">The Art of<br><em>Being You</em></h1>
+  <p class="program-subtitle">A 16-week identity reclamation program for online entrepreneurs, coaches, and creatives who have outgrown who they had to be to get here.</p>
+  <div class="promise-box">
+    <span class="promise-label">The Promise</span>
+    <p class="promise-text">"I help online entrepreneurs, coaches, and creatives who have outgrown who they had to be to get here — and are now stuck in the loop of knowing what they want to do but not trusting themselves enough to do it, over-consuming content, and circling the same decisions over and over — break out of the second-guessing cycle, release the version of themselves they've been holding onto, and start making aligned moves from their own authority so they can finally move forward without feeling like they have to start over."</p>
+  </div>
+</div>
+
+<!-- META BAR -->
+<div class="meta-bar">
+  <div class="meta-item">
+    <span class="meta-value">16</span>
+    <span class="meta-label">Weeks</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-value">9</span>
+    <span class="meta-label">Core Steps</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-value">4</span>
+    <span class="meta-label">Phases</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-value">4</span>
+    <span class="meta-label">Playbooks</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-value">2</span>
+    <span class="meta-label">Program Tiers</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-value">HD + ☽</span>
+    <span class="meta-label">Personalized To</span>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Core Curriculum</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <!-- PHASE 1 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div>
+          <div class="phase-name">Phase 1 — Awaken</div>
+          <div class="phase-meta">Weeks 1–4 &nbsp;·&nbsp; Steps 1, 2, 3</div>
+        </div>
+        <div class="phase-shift">She stops calling the discomfort a problem and starts calling it information.</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">1</div>
+          <div class="step-keyword">Recognize</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Recognize</div>
+          <p class="step-desc">She acknowledges that the restlessness, disconnection, and dissatisfaction are not signs something is wrong with her. They are signs she has outgrown the identity and life she built. This is the permission to begin.</p>
+          <ul class="teaching-points">
+            <li>The discomfort is not dysfunction — it's data. Restlessness and the quiet feeling that something is off are the nervous system's way of saying: this no longer fits.</li>
+            <li>The life you built made sense for who you were. You didn't do it wrong — you've outgrown the woman who built it, and you've been pretending you haven't.</li>
+            <li>Naming it is the beginning of everything. You cannot change what you won't acknowledge. The moment she says out loud — something is off and I am done pretending it isn't — that's when the work becomes possible.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">The Honest Audit</div>
+              <div class="integration-desc">Helps her map her external life against her internal truth so she can see clearly — for the first time — exactly where the gap lives and what it's been costing her.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">2</div>
+          <div class="step-keyword">Decode</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Decode</div>
+          <p class="step-desc">She learns her actual design — Human Design and astrology — as a living blueprint for who she is, how she's meant to move, make decisions, and create. She stops measuring herself against someone else's operating system.</p>
+          <ul class="teaching-points">
+            <li>You have been running someone else's operating system. HD and astrology are not personality tests — they are maps of how she is actually built. When she understands her design, the self-judgment starts to dissolve.</li>
+            <li>Your authority is the most important thing you will ever learn about yourself. Every pattern she has developed has been a workaround for not trusting this signal.</li>
+            <li>Your chart is not a ceiling — it's a compass. Used as a compass rather than a constraint, her blueprint becomes the most liberating thing she has ever encountered.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Blueprint Reading — HD + Astrology Personalized Loom</div>
+              <div class="integration-desc">A recorded personalized reading of her Human Design and astrology chart that gives her a living reference point for her authority, energy type, and soul blueprint — something she returns to throughout the entire program.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">3</div>
+          <div class="step-keyword">Name</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Name</div>
+          <p class="step-desc">She identifies the specific survival pattern that has been quietly running her decisions — where it came from, what it protected her from, and what it has been costing her. She sees it clearly for the first time without shame.</p>
+          <ul class="teaching-points">
+            <li>The pattern was brilliant once. The Shapeshifter, the Performer, the Controller, the Ghost, the Strategist — every pattern formed in response to something real, and it worked. That's why it's still here. The work is not to shame the pattern but to graduate from it.</li>
+            <li>The pattern has been making decisions she thought she was making — quietly running her relationships, her career, her creative expression, her sense of self — without her conscious participation.</li>
+            <li>Seeing it clearly is not the same as being defined by it. What has been unconscious can now be chosen. She gets to decide, for the first time, whether she acts from the pattern or from herself.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Shadow Story Map</div>
+              <div class="integration-desc">Guides her through naming, tracing, and witnessing her specific survival pattern so she can see exactly how it operates — which rooms it activates, what it does when triggered — and begin to separate herself from it.</div>
+            </div>
+          </div>
+          <div class="integration" style="margin-top:8px;">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Season Assessment</div>
+              <div class="integration-desc">Identifies which of the four seasons she is entering and what that season is specifically asking of her — so she can stop fighting her own natural rhythm and start working with it from day one.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-feels">
+        <span class="phase-feels-label">What she feels at the end of Phase 1</span>
+        <div class="phase-feels-text">"I finally understand what has been happening. Nothing is wrong with me. I have been running someone else's operating system inside a life I have already outgrown — and I can see exactly how and why. That awareness alone has already shifted something."</div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div>
+          <div class="phase-name">Phase 2 — Unravel</div>
+          <div class="phase-meta">Weeks 5–8 &nbsp;·&nbsp; Steps 4, 5, 6</div>
+        </div>
+        <div class="phase-shift">She releases what's past its purpose — without destroying what was valuable.</div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">4</div>
+          <div class="step-keyword">Release</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Release</div>
+          <p class="step-desc">She grieves and releases what is past its purpose — the identity, the roles, the stories, the guilt — and makes the active real-world moves that create space. The garden gets cleared. It looks bare. That's correct.</p>
+          <ul class="teaching-points">
+            <li>You cannot build the new life inside the old identity. Release is not about destroying what was — it's about completing it. Honoring what it gave her and consciously choosing not to carry it forward.</li>
+            <li>Grief is part of the process and it deserves space. Grief that isn't honored doesn't disappear — it becomes resistance, self-sabotage, or the inability to fully commit to what's next.</li>
+            <li>The void between identities is not a sign she went backward. It is the fertile ground. Nothing can grow in a container that's already full. The clearing is the prerequisite for the creation.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">✦</div>
+            <div class="integration-body">
+              <div class="integration-name">The Release Ritual</div>
+              <div class="integration-desc">A structured process for actively completing what's past its purpose — combining written reflection, somatic awareness, and a closing declaration so the release is felt in the body, not just understood in the mind.</div>
+            </div>
+          </div>
+          <div class="integration" style="margin-top:8px;">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">The Desire Inventory</div>
+              <div class="integration-desc">Unedited. Unfiltered. A guided process for naming what she actually wants — without negotiating it down, making it palatable, or asking anyone's permission first.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">5</div>
+          <div class="step-keyword">Reclaim</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Reclaim</div>
+          <p class="step-desc">She takes her authority back. Her voice. Her worthiness. Her desires. She learns to trust her own signal — to distinguish fear talking from truth pulling — and returns decision-making back to herself.</p>
+          <ul class="teaching-points">
+            <li>Worthiness is not something you earn — it's something you remember. She has been operating under a belief that she has to prove her value before she's allowed to want what she wants. Reclaiming worthiness means understanding it was never conditional.</li>
+            <li>Her voice has been edited before it ever left the room. Reclaiming voice is not about becoming louder — it's about stopping the internal approval process that happens before she speaks, creates, decides, or shows up.</li>
+            <li>She has to learn the difference between fear talking and truth pulling. Fear contracts and protects. Truth pulls and expands — even when it's terrifying. Learning to feel that difference in her body is the foundation of genuine self-trust.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Abandonment Map</div>
+              <div class="integration-desc">Surfaces the specific moments and patterns where she has been leaving herself — shrinking, editing, deferring — so she can begin reclaiming those moments one by one with intentional, concrete action.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">6</div>
+          <div class="step-keyword">Threshold</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Cross the Threshold</div>
+          <p class="step-desc">She makes the decision she has been circling. The one she already knows. She stops protecting the hidden thing and chooses herself — even when it disrupts something. This is the moment the identity shifts.</p>
+          <ul class="teaching-points">
+            <li>She already knows. The threshold is not about finding more information or waiting for more certainty — it's about acknowledging what she knows and choosing to move from that place instead of continuing to protect the story that keeps her from having to.</li>
+            <li>Nothing that comes into the light holds the same power it had in the dark. When she brings it forward, names it, speaks it, owns it — it loses the grip it has had. Not because everything becomes easy. Because she is no longer spending energy maintaining the hiding.</li>
+            <li>The threshold is the moment the identity actually shifts. Not the insight. Not the breakthrough session. Not the journal entry. The moment she acts on what she knows — that is when the new version of herself becomes real.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">The Threshold Letter</div>
+              <div class="integration-desc">The decision named and claimed on paper — a written act of crossing that makes the shift real, witnessed, and impossible to untake. Her permission slip written to herself.</div>
+            </div>
+          </div>
+          <div class="integration" style="margin-top:8px;">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">The Courage to Evolve Teaching</div>
+              <div class="integration-desc">Covers the graceful exit, the identity upgrade, and the entry — how to move out of what no longer fits without making it a dramatic destruction, and how to honor both the old and the new in the process.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-feels">
+        <span class="phase-feels-label">What she feels at the end of Phase 2</span>
+        <div class="phase-feels-text">"I have put down what I was carrying. Not destroyed it — completed it. I have said the thing I have been holding back. I have made the decision I have been circling. Something has genuinely shifted — not just in my mind but in my body. I am lighter. And I can feel what's on the other side."</div>
+      </div>
+    </div>
+
+    <!-- INTEGRATION WEEK -->
+    <div style="background: rgba(196,151,90,0.08); border: 1px dashed rgba(196,151,90,0.4); padding: 20px 28px; margin-bottom: 40px; display:flex; align-items:center; gap:20px;">
+      <div style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--gold); white-space:nowrap;">Week 9</div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--forest); margin-bottom:4px;">Integration Week</div>
+        <div style="font-size:13px; color:var(--muted);">No new curriculum. Space to breathe, integrate, and land. Community support channels open. Q&A threads active. This is a deliberate pause built into the architecture — not a gap.</div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div>
+          <div class="phase-name">Phase 3 — Root</div>
+          <div class="phase-meta">Weeks 10–12 &nbsp;·&nbsp; Steps 5 continued, 7</div>
+        </div>
+        <div class="phase-shift">She builds the internal muscles of self-leadership and aligns with her natural rhythm.</div>
+      </div>
+
+      <!-- Step 5 continued -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">5+</div>
+          <div class="step-keyword">Reclaim</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Reclaim — Continued</div>
+          <p class="step-desc">Step 5 spans both Phase 2 and Phase 3 deliberately. The initial reclaiming happens in Unravel — she names her worthiness, takes her voice off mute, makes the threshold decision. In Phase 3, the self-leadership practice of living from that reclaimed authority deepens. She doesn't just reclaim once. She practices it until it becomes her default.</p>
+          <ul class="teaching-points">
+            <li>Self-leadership in real time — choosing authenticity over approval in the actual moments it costs something.</li>
+            <li>Returning authority to herself consistently — not once in a breakthrough session, but as a daily practice that compounds over time.</li>
+            <li>The difference between a reclamation that's intellectual and one that's embodied — and how she builds the latter through repetition, not insight.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Decision Journal</div>
+              <div class="integration-desc">A daily practice of making decisions from her HD authority in real time — tracking the feel of aligned moves vs. fear moves so she builds the discernment muscle in her body, not just her mind.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">7</div>
+          <div class="step-keyword">Align</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Align</div>
+          <p class="step-desc">She learns her season, her cycles, her rhythm — and stops forcing the wrong energy at the wrong time. She understands she is held and supported by something larger than herself. She is not doing this alone.</p>
+          <ul class="teaching-points">
+            <li>You were never meant to produce at the same level in every season. Understanding her current season — Renewal, Reclaiming, Radiating, or Rebuilding — gives her permission to work with her actual energy instead of against it.</li>
+            <li>The lunar cycle is a monthly rhythm she can learn to work with. When she aligns her creative and emotional energy with the lunar rhythm instead of ignoring it, she stops feeling erratic and starts feeling supported.</li>
+            <li>She is held by something larger than herself — and learning to feel that changes everything. The cocreation framework teaches her she is in a living relationship with her design, the cycles, and universal principles that are always working with her when she is aligned.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Seasonal Alignment Guide</div>
+              <div class="integration-desc">Maps what her current season is specifically asking of her — what to lean into, what to stop forcing, and how to honor the natural rhythm she's in rather than fighting it as a personal failure.</div>
+            </div>
+          </div>
+          <div class="integration" style="margin-top:8px;">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Lunar Rhythm Map</div>
+              <div class="integration-desc">Her monthly creative and emotional energy mapped to the lunar cycle — a practical tool she keeps and uses every month long after the program ends to stop feeling scattered and start feeling supported.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-feels">
+        <span class="phase-feels-label">What she feels at the end of Phase 3</span>
+        <div class="phase-feels-text">"I know how I am built. I know what season I am in. I know how to make decisions from my own authority instead of everyone else's. I am not doing this alone — and I can feel the difference between forcing and flowing. I am building something I can actually sustain."</div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div>
+          <div class="phase-name">Phase 4 — Create</div>
+          <div class="phase-meta">Weeks 13–15 &nbsp;·&nbsp; Steps 8, 9</div>
+        </div>
+        <div class="phase-shift">She builds a life that is genuinely, recognizably, unapologetically hers.</div>
+      </div>
+
+      <!-- Step 8 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">8</div>
+          <div class="step-keyword">Create</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Create</div>
+          <p class="step-desc">She builds. Sustainably. From her actual truth, her design, her desires. Not a better-performing version of the old life — something genuinely, recognizably hers.</p>
+          <ul class="teaching-points">
+            <li>Creation from truth looks completely different from creation from conditioning. Building from her actual truth — her desires, her design, her values — produces something that feels alive instead of just functional.</li>
+            <li>Sustainable creation is rhythmic, not relentless. She builds in seasons, in lunar cycles, in ebbs and flows that are designed into her nature. The rhythm is not inconsistency — it is wisdom.</li>
+            <li>The life she is building is not a project — it is an expression. She is not building toward a destination. She is building a life that is a continuous, living expression of who she actually is.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Life Architecture Map</div>
+              <div class="integration-desc">A structure for her life, work, and creative expression designed around her actual energy type and design — not inherited from industry norms or what worked for the version of herself she's leaving behind.</div>
+            </div>
+          </div>
+          <div class="integration" style="margin-top:8px;">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Ritual System</div>
+              <div class="integration-desc">Daily, weekly, and seasonal practices built specifically for her energy type, season, and design — the sustainable infrastructure of tending to herself that holds the transformation in place.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 9 -->
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">9</div>
+          <div class="step-keyword">Tend</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Tend</div>
+          <p class="step-desc">She tends to herself — always. Not as a destination but as a practice. Worthiness, voice, movement, rootedness — tended daily. She becomes unshakable. Obsessed with her life. Her way.</p>
+          <ul class="teaching-points">
+            <li>Tending is not a phase — it is the practice for life. The woman who tends to herself every day, not perfectly but consistently, becomes someone who is genuinely unshakable. Not because nothing moves her. Because she always comes back to herself.</li>
+            <li>The duality is the point — always becoming and already enough at the same time. Learning to hold both of those truths at once is the most advanced thing she will ever do. And it is available to her right now.</li>
+            <li>An unshakable woman is not one who never doubts — she's one who never abandons herself. She tends. She returns. She chooses herself again. Every time. That is the art of being her. Her way.</li>
+          </ul>
+          <div class="integration">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Embodiment Portrait</div>
+              <div class="integration-desc">A written portrait of the woman she has become — her values, her voice, her non-negotiables, her way of moving — so she has a living document to return to whenever she needs to remember who she is.</div>
+            </div>
+          </div>
+          <div class="integration" style="margin-top:8px;">
+            <div class="integration-icon">📋</div>
+            <div class="integration-body">
+              <div class="integration-name">Her Tending Practice</div>
+              <div class="integration-desc">The ongoing personal practice that sustains everything — designed around her specific design, season, and rhythm so it's actually something she'll return to, not something she abandons when life gets busy.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-feels">
+        <span class="phase-feels-label">What she feels at the end of Phase 4</span>
+        <div class="phase-feels-text">"I am building something real. Something that is mine. Not a better-performing version of the old life — something that feels alive, aligned, and completely obsessed-over. I know how to tend to myself now. I know my rhythm. I know my design. I know my season. And I know I will never fully arrive — and that is not a problem. That is the art of being me."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYBOOKS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Playbooks</h2>
+    </div>
+    <div class="section-divider"></div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:28px;">Ongoing reference tools — designed to be kept, returned to, and used long after the program ends. These are not one-time worksheets. They are your living operating manual.</p>
+
+    <div class="playbooks-grid">
+      <div class="playbook-card">
+        <div class="playbook-name">The Return to Self Reset</div>
+        <div class="playbook-objective">Objective — Immediate Reorientation</div>
+        <p class="playbook-desc">For the moment she loses herself — in a season, a spiral, or someone else's energy. This is the tool she reaches for to find her way back to herself without having to start over from scratch.</p>
+      </div>
+      <div class="playbook-card">
+        <div class="playbook-name">The Season Map</div>
+        <div class="playbook-objective">Objective — Seasonal Clarity + Permission</div>
+        <p class="playbook-desc">Helps her identify which season she's in, what it's asking, what to stop forcing, and how to work with her natural energy instead of against it. The practical backbone of the whole philosophy.</p>
+      </div>
+      <div class="playbook-card">
+        <div class="playbook-name">The Lunar Living Guide</div>
+        <div class="playbook-objective">Objective — Monthly Rhythm + Cocreation</div>
+        <p class="playbook-desc">Her monthly creative and emotional energy mapped to the lunar cycle so she stops feeling erratic and starts feeling supported. She uses this one every single month — long after the program ends.</p>
+      </div>
+      <div class="playbook-card">
+        <div class="playbook-name">The Pattern Interruption Guide</div>
+        <div class="playbook-objective">Objective — In-the-Moment Pattern Break</div>
+        <p class="playbook-desc">A practical in-the-moment tool for when the Shapeshifter starts adjusting, the Controller starts gripping, the Ghost starts dimming. Not a concept — something she can reach for right then, in real time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADENCE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Suggested Cadence & Structure</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <div class="cadence-grid">
+      <div class="cadence-card">
+        <div class="cadence-title">Program Flow — 16 Weeks</div>
+        <ul class="cadence-list">
+          <li><span class="cadence-week">Week 1</span> Welcome week — portal orientation, community intros, no curriculum</li>
+          <li><span class="cadence-week">Wks 2–4</span> Phase 1: Awaken — Steps 1, 2, 3</li>
+          <li><span class="cadence-week">Wks 5–8</span> Phase 2: Unravel — Steps 4, 5, 6</li>
+          <li><span class="cadence-week">Wk 9</span> Integration week — no new curriculum, community support open</li>
+          <li><span class="cadence-week">Wks 10–12</span> Phase 3: Root — Step 5 continued + Step 7</li>
+          <li><span class="cadence-week">Wks 13–15</span> Phase 4: Create — Steps 8, 9</li>
+          <li><span class="cadence-week">Week 16</span> Closing celebration week — reflection, renewals, graduation</li>
+        </ul>
+      </div>
+      <div class="cadence-card">
+        <div class="cadence-title">Monthly Group Calls (2x/month)</div>
+        <ul class="cadence-list">
+          <li><span class="cadence-week">Call 1</span> Coaching Q&A — live coaching and hot seat on current phase</li>
+          <li><span class="cadence-week">Call 2</span> Themed Structured Call — TBD; tied to current curriculum step</li>
+        </ul>
+        <div style="height:16px"></div>
+        <div class="cadence-title">Community Portal</div>
+        <ul class="cadence-list">
+          <li><span class="cadence-week">Ongoing</span> Q&A threads per step</li>
+          <li><span class="cadence-week">Ongoing</span> Identity Release / Letting Go Celebration thread — tied to Step 4</li>
+          <li><span class="cadence-week">Ongoing</span> Private podcast feed — teachings + Q&A responses</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIERS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Program Tiers</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <div class="tiers-grid">
+      <div class="tier-card tier-base">
+        <span class="tier-badge">Core Experience</span>
+        <div class="tier-name">Base Tier</div>
+        <div class="tier-price">$2,500</div>
+        <div class="tier-pp">or 4 payments of $625</div>
+        <div class="tier-divider"></div>
+        <div class="tier-includes">Includes</div>
+        <ul class="tier-features">
+          <li>Full 9-step Art of Being You Method curriculum</li>
+          <li>All 4 playbooks + phase integration deliverables</li>
+          <li>2x monthly group calls (Coaching Q&A + Themed Call)</li>
+          <li>Group community portal with Q&A threads</li>
+          <li>Identity Release / Letting Go Celebration thread</li>
+          <li>Built-in integration week (Week 9)</li>
+          <li>Private podcast feed (teachings + answers)</li>
+          <li>Welcome week + closing celebration week</li>
+        </ul>
+      </div>
+
+      <div class="tier-card tier-vip">
+        <span class="tier-badge">Full Immersion</span>
+        <div class="tier-name">VIP Tier</div>
+        <div class="tier-price">$4,500</div>
+        <div class="tier-pp">or 4 payments of $1,125</div>
+        <div class="tier-divider"></div>
+        <div class="tier-includes">Everything in Base, Plus</div>
+        <ul class="tier-features">
+          <li>Personalized Human Design + Astrology reading (recorded Loom)</li>
+          <li>4–5 Chart Deep Dive Embodiment Analysis (recorded Loom readings)</li>
+          <li>2x 1:1 coaching calls (use any time during 16 weeks)</li>
+          <li>Direct access private messaging channel</li>
+          <li>Priority access on group calls — VIPs go first</li>
+          <li>Early access to all curriculum drops</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BONUS IDEAS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2 class="section-title">Bonus Ideas</h2>
+    </div>
+    <div class="section-divider"></div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:24px;">Brain dump — not committed. To be revisited and refined after alpha cohort.</p>
+    <ul class="bonus-list">
+      <li>The North Node Bonus — purpose, direction, what you're here to do</li>
+      <li>The Pluto Wound Bonus — core wound + core power, deepest transformation</li>
+      <li>The Venus Placement Bonus — desire reclamation, what you're here to want</li>
+      <li>The Art of Saying No Bonus — saying no as self-trust and self-expression</li>
+      <li>Identity Expansion / Future Self work</li>
+      <li>Hard Decisions series — life pivots, endings, transitions</li>
+      <li>Cycles & Timing — lunar + energetic rhythms (deeper dive)</li>
+      <li>Boundaries & "Saying No" frameworks</li>
+    </ul>
+  </div>
+</div>
+
+<!-- RENEWAL -->
+<div class="container">
+  <div class="renewal-card">
+    <div class="renewal-title">Renewal Package</div>
+    <p class="renewal-sub">⚠️ Rough draft — random guess, placeholder only. This isn't real yet.</p>
+    <div class="renewal-grid">
+      <div class="renewal-option">
+        <span class="renewal-option-name">Base Renewal — 3 Months</span>
+        <div class="renewal-price">$1,500</div>
+        <div class="renewal-pp">or 3 payments of $500</div>
+        <ul class="renewal-includes">
+          <li>Continued community portal access</li>
+          <li>2x monthly group calls</li>
+          <li>Private podcast feed</li>
+          <li>Q&A thread support</li>
+        </ul>
+      </div>
+      <div class="renewal-option">
+        <span class="renewal-option-name">VIP Renewal — 3 Months</span>
+        <div class="renewal-price">$2,500</div>
+        <div class="renewal-pp">or 3 payments of $834</div>
+        <ul class="renewal-includes">
+          <li>Everything in Base Renewal</li>
+          <li>1x additional 1:1 coaching call</li>
+          <li>Continued direct access messaging</li>
+          <li>Priority access on all calls</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Renew You Living</div>
+  <div class="footer-note">renewyouliving.com — The Art of Being You Method™ — Alpha Cohort Draft v2</div>
+</div>
+
+</body>
+</html>
