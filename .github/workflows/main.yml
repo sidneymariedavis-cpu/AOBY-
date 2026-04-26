@@ -1,0 +1,13 @@
+name: "AI Pull Request Review"
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  ai-code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AI Code Review
+        uses: nitaiaharoni1/anthropic-pr-code-review@main
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
