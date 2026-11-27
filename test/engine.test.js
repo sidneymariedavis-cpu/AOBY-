@@ -118,3 +118,10 @@ test('inputsHash changes on input edits (stale detection) but not on UI-only sta
   const s = st([card({ id: 'a', hours: 1, status: 'flexible' })]); const h1 = E.inputsHash(s);
   s.cards[0].hours = 2; assert.notEqual(E.inputsHash(s), h1); const h2 = E.inputsHash(s); s.edit.x = 'y'; s.scenario.a = { action: 'decline' }; assert.equal(E.inputsHash(s), h2);
 });
+
+test('normalizeChart maps provider labels, never guesses unknown ones', () => {
+  assert.deepEqual(E.normalizeChart({ Type: 'Manifesting Generator', Strategy: 'To Respond, then Inform', InnerAuthority: 'Sacral', Profile: '3/5' }), { type: 'Manifesting Generator', strategy: 'To Respond, then Inform', authority: 'Sacral', profile: '3/5' });
+  assert.equal(E.normalizeChart({ Type: 'Projector', InnerAuthority: 'Ego' }).authority, 'Ego (Projected)');
+  assert.equal(E.normalizeChart({ Type: 'Generator', InnerAuthority: 'Emotional - Solar Plexus' }).authority, 'Emotional');
+  assert.deepEqual(E.normalizeChart({ Type: '???', Strategy: 'x', InnerAuthority: 'y', Profile: '9/9' }), { type: '', strategy: '', authority: '', profile: '' });
+});

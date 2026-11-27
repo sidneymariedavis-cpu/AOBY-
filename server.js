@@ -15,6 +15,7 @@ try {
 
 const E = require('./lib/engine');
 const AI = require('./lib/ai');
+const HD = require('./lib/hdapi');
 const { createStore } = require('./lib/store');
 
 function createApp(opts = {}) {
@@ -37,7 +38,7 @@ function createApp(opts = {}) {
     productName: 'The Capacity Compass', brand: 'Renew You Living',
     offerPrice: env('OFFER_PRICE', '27'), offerCurrency: env('OFFER_CURRENCY', 'USD'),
     checkoutUrl: env('CHECKOUT_URL'), supportEmail: env('SUPPORT_EMAIL'), coachingUrl: env('COACHING_URL'),
-    accessMode: testMode() ? 'test' : 'production', aiAvailable: AI.available(), aiProvider: 'Anthropic (Claude API)',
+    accessMode: testMode() ? 'test' : 'production', aiAvailable: AI.available(), hdLookup: HD.enabled(), aiProvider: 'Anthropic (Claude API)',
     retentionNote: env('AI_RETENTION_NOTE', 'We do not control or guarantee zero retention at the AI provider. Anthropic’s API terms and data-retention policy in effect at the time apply; check them before you submit anything sensitive.'),
     storage: env('DATA_ENCRYPTION_KEY') ? 'Your assessment is stored on our server, encrypted at rest, until you delete it.' : 'Your assessment is stored on our server until you delete it. (Encryption at rest is not enabled in this deployment.)'
   });
@@ -188,6 +189,21 @@ function createApp(opts = {}) {
     if (p === '/api/library' && m === 'GET') { // customer-facing view: approved entries only, nothing else
       const lib = readLib();
       return json(res, 200, { consistency_rules: lib.consistency_rules, entries: lib.entries.filter((e) => e.status === 'approved') .map((e) => ({ id: e.id, kind: e.kind, key: e.key, title: e.title, body: e.body, reflective_questions: e.reflective_questions, practical_application: e.practical_application, limitations: e.limitations, status: e.status })) });
+    }
+
+    // ---- Human Design chart lookup (birth details go to the chart provider only; nothing is stored or logged) ----
+    if (p === '/api/hd/locations' && m === 'GET') {
+      if (!HD.enabled()) return json(res, 200, { enabled: false, results: [] });
+      if (!limit('hdl:' + email, 40, 60000)) throw fail(429, 'Please slow down.');
+      const q = url.searchParams.get('q') || ''; if (q.length < 2) return json(res, 200, { enabled: true, results: [] });
+      try { return json(res, 200, { enabled: true, results: await HD.locations(q) }); } catch (e) { throw fail(502, 'Place search is unavailable right now.'); }
+    }
+    if (p === '/api/hd/chart' && m === 'POST') {
+      if (!HD.enabled()) throw fail(503, 'Chart lookup is not configured.');
+      if (!limit('hdc:' + email, 6, 600000)) throw fail(429, 'Too many lookups. Try again in a few minutes, or enter your chart details by hand.');
+      const b = JSON.parse((await readBody(req, 4096)).toString('utf8') || '{}');
+      try { return json(res, 200, { chart: await HD.chart({ date: String(b.date || ''), timezone: String(b.timezone || '') }) }); }
+      catch (e) { throw fail(e.status || 502, e.status === 400 ? e.message : 'The chart service is unavailable. You can enter your details by hand instead.'); }
     }
 
     // ---- AI endpoints ----

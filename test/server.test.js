@@ -163,3 +163,22 @@ test('sign-in link requests are rate limited per email', async () => {
   const codes = []; for (let i = 0; i < 5; i++) codes.push((await call('POST', '/api/auth/request', { email: 'rl@example.com' })).status); console.log = o;
   assert.deepEqual(codes, [200, 200, 200, 429, 429]);
 });
+
+test('HD chart lookup: key stays server-side, only 4 fields returned, birth details not persisted, validation + rate limit', async () => {
+  const HDA = require('../lib/hdapi'); const calls = [];
+  HDA.setFetch(async (url) => { calls.push(url); const u = new URL(url); return { ok: true, status: 200, json: async () => u.pathname.endsWith('/locations') ? [{ asciiname: 'Austin', admin1: 'Texas', country: 'US', timezone: 'America/Chicago' }] : { Properties: { Type: 'Projector', Strategy: 'Wait for the Invitation', InnerAuthority: 'Splenic', Profile: '4/6', BirthDateLocal: '1990-01-01 10:00', Signature: 'x' }, Design: {} } }; });
+  const cookie = await login('hd@example.com');
+  assert.equal((await call('POST', '/api/hd/chart', { date: '1990-01-01 10:00', timezone: 'America/Chicago' }, cookie)).status, 503); // no key yet
+  process.env.HD_API_KEY = 'secret-hd-key';
+  assert.equal((await call('GET', '/api/config')).json.hdLookup, true); assert.ok(!JSON.stringify((await call('GET', '/api/config')).json).includes('secret-hd-key'));
+  const loc = await call('GET', '/api/hd/locations?q=aus', null, cookie); assert.equal(loc.json.results[0].timezone, 'America/Chicago');
+  const r = await call('POST', '/api/hd/chart', { date: '1990-01-01 10:00', timezone: 'America/Chicago' }, cookie);
+  assert.deepEqual(r.json, { chart: { type: 'Projector', strategy: 'Wait for the Invitation', authority: 'Splenic', profile: '4/6' } });
+  assert.ok(!JSON.stringify(r.json).includes('1990')); assert.ok(calls.at(-1).includes('api_key=secret-hd-key'));
+  assert.equal((await call('POST', '/api/hd/chart', { date: 'bad', timezone: 'x' }, cookie)).status, 400);
+  assert.equal((await realFetch(base + '/api/hd/locations?q=aus')).status, 401); // needs a session
+  assert.ok(!fs.readFileSync(path.join(tmp, 'db.json'), 'utf8').includes('1990-01-01'));
+  for (let i = 0; i < 6; i++) await call('POST', '/api/hd/chart', { date: '1990-01-01 10:00', timezone: 'America/Chicago' }, cookie);
+  assert.equal((await call('POST', '/api/hd/chart', { date: '1990-01-01 10:00', timezone: 'America/Chicago' }, cookie)).status, 429);
+  process.env.HD_API_KEY = '';
+});

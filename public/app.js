@@ -271,6 +271,7 @@
       hd.use ? h('div', { class: 'card hd', style: 'margin-top:14px' },
         h('p', { class: 'hint' }, 'Human Design here is an optional symbolic self-reflection framework — not a scientific measure of health, energy, personality or decision-making ability. Enter only what you know; leave the rest.'),
         h('div', { class: 'grid two' }, field('Type', sel('type', E.HD_TYPES)), field('Strategy', sel('strategy', E.HD_STRATEGIES)), field('Authority', sel('authority', E.HD_AUTHORITIES)), field('Profile (optional)', sel('profile', E.HD_PROFILES))),
+        CFG.hdLookup ? hdLookupPanel() : null,
         bad ? h('div', { class: 'card warn', role: 'status' }, h('p', {}, bad.message), h('div', { class: 'row' },
           h('button', { class: 'small', onclick: () => mutate(() => { hd[bad.fields[1]] = 'unsure'; }) }, `Set ${bad.fields[1]} to “not sure”`),
           h('button', { class: 'small', onclick: () => mutate(() => { hd.type = 'unsure'; }) }, 'Set type to “not sure”'),
@@ -278,6 +279,25 @@
         (LIB && E.hdMatches(hd, LIB).length === 0 && (hd.type || hd.authority)) ? h('p', { class: 'hint' }, 'Heads up: the approved reflection library doesn’t yet have material for these details, so no Human Design reflection will be shown until the founder adds it. Nothing will be invented.') : null) : null,
       h('div', { class: 'stepnav' }, h('button', { onclick: () => go('priority') }, 'Back'),
         h('button', { class: 'primary', disabled: !!ui.busy, onclick: build }, ui.busy === 'build' ? h('span', {}, h('span', { class: 'spin' }), ' Building…') : 'Build my Compass')));
+  }
+  const hdq = { date: '', time: '', q: '', results: [], tz: '', label: '', ok: false, msg: '' };
+  function hdLookupPanel() {
+    return det('hdlookup', 'card', h('span', { class: 'name', style: 'font-size:1rem' }, 'Don’t know your chart? Look it up from your birth details'),
+      h('p', { class: 'hint' }, 'Your birth date, time and place are sent to BodyGraphChart (the chart-calculation provider) only to calculate Type, Strategy, Authority and Profile. We don’t store them, and they’re never sent to the AI. Their own terms apply to how they handle the request. A birth time is required.'),
+      h('div', { class: 'grid two' }, field('Birth date', h('input', { type: 'date', 'data-fk': 'hdd', value: hdq.date, onchange: (e) => { hdq.date = e.target.value; } })), field('Birth time (24h)', h('input', { type: 'time', 'data-fk': 'hdt', value: hdq.time, onchange: (e) => { hdq.time = e.target.value; } }))),
+      field('Birth place', h('div', { class: 'row', style: 'flex-wrap:nowrap' }, h('input', { 'data-fk': 'hdp', placeholder: 'City', value: hdq.q, oninput: (e) => { hdq.q = e.target.value; } }),
+        h('button', { class: 'small', onclick: async () => { try { const r = await api('GET', '/api/hd/locations?q=' + encodeURIComponent(hdq.q)); hdq.results = r.results; hdq.msg = r.results.length ? '' : 'No matches.'; } catch (e) { hdq.msg = e.message; } render(); } }, 'Search'))),
+      hdq.results.length ? field('Choose the place', selectEl('hdr', [['', 'Choose…'], ...hdq.results.map((x) => [x.timezone, x.label])], hdq.tz, (v) => { hdq.tz = v; hdq.label = (hdq.results.find((x) => x.timezone === v) || {}).label || ''; render(); })) : null,
+      hdq.msg ? h('p', { class: 'hint', role: 'status' }, hdq.msg) : null,
+      h('button', { class: 'small primary', disabled: !(hdq.date && hdq.time && hdq.tz) || !!ui.busy, onclick: async () => {
+        ui.busy = 'hdc'; render();
+        try {
+          const r = await api('POST', '/api/hd/chart', { date: hdq.date + ' ' + hdq.time, timezone: hdq.tz });
+          const c = r.chart; Object.assign(S.hd, { use: true, type: c.type || 'unsure', strategy: c.strategy || 'unsure', authority: c.authority || 'unsure', profile: c.profile || 'unsure', source: 'chart' });
+          hdq.date = hdq.time = hdq.q = hdq.tz = hdq.label = ''; hdq.results = []; hdq.msg = 'Chart details filled in above. Birth details were discarded.'; save();
+        } catch (e) { hdq.msg = e.message; }
+        ui.busy = ''; render();
+      } }, ui.busy === 'hdc' ? 'Looking up…' : 'Look up my chart'));
   }
   async function build() {
     ui.busy = 'build'; ui.error = ''; render();

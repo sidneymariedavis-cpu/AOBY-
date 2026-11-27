@@ -6,7 +6,7 @@ AI-assisted personal capacity & decision-support tool. Zero npm dependencies (No
 ```bash
 cp .env.example .env     # edit as needed
 npm run dev              # ACCESS_MODE=test (NON-PRODUCTION): any email can sign in; link shown on screen
-npm test                 # 41 automated tests (engine, auth, entitlements, AI layer with a mocked provider)
+npm test                 # 43 automated tests (engine, auth, entitlements, AI layer with a mocked provider)
 npm start                # production-mode access: entitlement required
 ```
 Open http://localhost:3000. Founder admin: http://localhost:3000/admin (needs `ADMIN_TOKEN`).
@@ -43,11 +43,14 @@ Test access (`ACCESS_MODE=test`, or admin "Grant TEST access") is bannered "non-
 ## Human Design library
 `data/hd-library.json` ships with **zero approved entries and no invented definitions**. Until entries are approved, users who enter chart details see "no approved reflection available". Founder: open `/admin`, load with `ADMIN_TOKEN`, write wording per Type/Authority/Strategy/Profile (body, reflective questions with optional `{responsibility}`, practical application, limitations), set status `approved`. Editing an approved entry bumps its version and returns it to draft. Required before launch is listed in the file (`requiredBeforeLaunch`) and in the admin page. The `consistency_rules` block (valid Type/Authority/Strategy pairings, used only to ask one clarifying question) is a standard mapping — **founder should verify it**.
 
+## Human Design chart lookup (BodyGraphChart API)
+Optional. Set `HD_API_KEY` (server-side only) and Step 4 offers "look it up from your birth details": birth date/time/place → server → BodyGraphChart → only Type, Strategy, Authority and Profile come back and pre-fill the form (marked as from-chart). Birth details are held in browser memory only, never saved, logged or sent to the AI; lookups are limited to 6 per 10 minutes per user. Without the key, manual entry and Skip work as before. The adapter (`lib/hdapi.js`, `E.normalizeChart`) maps the provider's `Properties` (`Type`, `Strategy`, `InnerAuthority`, `Profile`) to our labels and leaves a field blank if it can't map it. **Verify against a real response** — I only had their example code, not live output, so label spellings (e.g. how Ego authority is named) are unconfirmed. Check BodyGraphChart's terms on data handling and update the privacy text if needed. Chart data supplies facts only; reflections still need your approved library entries.
+
 ## Deploy
 Any Node host (Render, Fly, Railway, a VPS) behind HTTPS. Mount a persistent volume at `DATA_DIR`; set `DATA_ENCRYPTION_KEY` (`openssl rand -hex 32`). For multi-instance scale, replace `lib/store.js` with Postgres/Supabase and move rate-limit counters to Redis. No third-party scripts/fonts/analytics are loaded.
 
 ## Test results
-**Performed and passing (41):** scenarios 1–5, 7–9, 11, 12 and the 6 (HD skipped) logic in `test/engine.test.js`; unauthenticated rejection, production no-access, webhook verification, single-use links, revocation, per-email rate limit, CSRF header, encryption at rest, user isolation, admin auth, approval workflow, AI schema rejection, hallucinated-id dropping, evidence stripping, AI daily limit, AI failure fallback, safety short-circuit, static path traversal (`test/server.test.js`). Manual browser run (Chromium, 390×844 phone viewport): full flow brain dump → cards → capacity → priority → skip HD → dashboard → accept → boundary → next move → Capacity Edit, reload persistence, no console errors.
+**Performed and passing (43):** scenarios 1–5, 7–9, 11, 12 and the 6 (HD skipped) logic in `test/engine.test.js`; unauthenticated rejection, production no-access, webhook verification, single-use links, revocation, per-email rate limit, CSRF header, encryption at rest, user isolation, admin auth, approval workflow, AI schema rejection, hallucinated-id dropping, evidence stripping, AI daily limit, AI failure fallback, safety short-circuit, static path traversal (`test/server.test.js`). Manual browser run (Chromium, 390×844 phone viewport): full flow brain dump → cards → capacity → priority → skip HD → dashboard → accept → boundary → next move → Capacity Edit, reload persistence, no console errors.
 **Not performed:** live Anthropic calls (no key/network; AI tested against a mocked provider only, so real output quality and prompt tuning are unverified); live GoHighLevel webhook; real email delivery; scenario 10 (reject → custom action) and the HD UI with approved content were exercised via logic/API, not clicked through in the browser; scenario 11's UI path not clicked through; screen-reader and keyboard-only audit; real-device mobile testing; PDF export is via the browser print dialog (print CSS provided, not visually verified in a print preview); load testing.
 
 ## Remaining launch requirements
