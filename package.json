@@ -1,0 +1,12 @@
+{
+  "name": "capacity-compass",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Capacity Compass — AI-powered personal capacity and decision-support tool (Renew You Living)",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "ACCESS_MODE=test node server.js",
+    "test": "node --test test/*.test.js"
+  }
+}

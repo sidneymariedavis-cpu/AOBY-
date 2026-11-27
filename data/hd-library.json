@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "name": "Renew You Living — Human Design reference library",
+  "updatedAt": null,
+  "instructions": "Founder: edit this file via /admin.html (or by hand). Only entries with status \"approved\" are ever used in customer-facing reflections. Nothing here is pre-written on purpose: no Human Design definitions have been invented. Add your own wording to body, reflective_questions, practical_application and limitations, then set status to approved.",
+  "requiredBeforeLaunch": [
+    "At least one approved entry (with at least one reflective question) for each of the 5 Types, so every Type-only user gets a reflection.",
+    "At least one approved entry for each Authority (8 listed) — Authority is the main driver of the decision reflection.",
+    "Approved Strategy entries (5 listed) if you want Strategy-based prompts.",
+    "Profile entries are optional; add the profiles you want to support (12 listed).",
+    "A global 'limitations' entry (kind: limitation) with your approved wording about Human Design being a symbolic self-reflection framework.",
+    "Optional approved examples (kind: example) showing how a reflection connects to a real decision."
+  ],
+  "consistency_rules": {
+    "_note": "Used ONLY to ask one clarifying question when a Type/Authority/Strategy combination looks inconsistent. Founder: please verify these against your own training and edit as needed.",
+    "Manifestor": { "strategies": ["To Inform"], "authorities": ["Emotional", "Splenic", "Ego (Manifested)"] },
+    "Generator": { "strategies": ["To Respond"], "authorities": ["Sacral", "Emotional", "Splenic"] },
+    "Manifesting Generator": { "strategies": ["To Respond", "To Respond, then Inform"], "authorities": ["Sacral", "Emotional", "Splenic"] },
+    "Projector": { "strategies": ["Wait for the Invitation"], "authorities": ["Emotional", "Splenic", "Ego (Projected)", "Self-Projected", "Mental / Environmental"] },
+    "Reflector": { "strategies": ["Wait a Lunar Cycle"], "authorities": ["Lunar"] }
+  },
+  "entries": [
+    { "id": "limitation-global", "kind": "limitation", "key": "global", "title": "Global limitations statement", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "type-manifestor", "kind": "type", "key": "Manifestor", "title": "Manifestor", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "type-generator", "kind": "type", "key": "Generator", "title": "Generator", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "type-manifesting-generator", "kind": "type", "key": "Manifesting Generator", "title": "Manifesting Generator", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "type-projector", "kind": "type", "key": "Projector", "title": "Projector", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "type-reflector", "kind": "type", "key": "Reflector", "title": "Reflector", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-emotional", "kind": "authority", "key": "Emotional", "title": "Emotional Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-sacral", "kind": "authority", "key": "Sacral", "title": "Sacral Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-splenic", "kind": "authority", "key": "Splenic", "title": "Splenic Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-ego-manifested", "kind": "authority", "key": "Ego (Manifested)", "title": "Ego (Manifested) Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-ego-projected", "kind": "authority", "key": "Ego (Projected)", "title": "Ego (Projected) Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-self-projected", "kind": "authority", "key": "Self-Projected", "title": "Self-Projected Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-mental", "kind": "authority", "key": "Mental / Environmental", "title": "Mental / Environmental Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "auth-lunar", "kind": "authority", "key": "Lunar", "title": "Lunar Authority", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "strat-inform", "kind": "strategy", "key": "To Inform", "title": "To Inform", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "strat-respond", "kind": "strategy", "key": "To Respond", "title": "To Respond", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "strat-respond-inform", "kind": "strategy", "key": "To Respond, then Inform", "title": "To Respond, then Inform", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "strat-invitation", "kind": "strategy", "key": "Wait for the Invitation", "title": "Wait for the Invitation", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null },
+    { "id": "strat-lunar", "kind": "strategy", "key": "Wait a Lunar Cycle", "title": "Wait a Lunar Cycle", "body": "", "reflective_questions": [], "practical_application": "", "limitations": "", "status": "draft", "version": 1, "approvedBy": null, "approvedAt": null }
+  ]
+}
